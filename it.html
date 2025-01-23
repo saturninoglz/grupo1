@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets Recibidos vs Procesados</title>
+  <!-- Incluir la librería de ApexCharts -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <!-- Incluir el CDN de Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .info-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #007bff;
+    }
+  </style>
+</head>
+
+<body class="bg-light py-5">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <b>Grupo 1</b>
+        <span class="text-white-50 small">Lolo | Nino</span>
+      </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="it.html">IT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="camp.html">Summer Camp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="text-center mt-4 mb-4 justify-content-between">
+      <h1 class="display-6 mb-0">Recibidos vs procesados <i class="bi bi-info-circle info-icon ms-2"
+          data-bs-toggle="modal" data-bs-target="#infoModal"></i>
+      </h1>
+      <p class="text-muted">Eficiencia anual en la resolución de tickets IT</p>
+    </div>
+    <div id="chart1" class="bg-white p-4 rounded shadow mx-auto" style="max-width: 900px;"></div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoModalLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          Se utilizó una gráfica combinada de barras y línea para mostrar la eficiencia anual en la resolución de tickets en un departamento de IT. Las barras representan los tickets recibidos y procesados, mientras que la línea muestra la diferencia entre ambos. Este formato permite observar cómo la eficiencia cae a partir de mayo, cuando un miembro clave del equipo se jubila.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Configuración del gráfico
+    var opciones1 = {
+      chart: {
+        height: 400, // Mantén una altura proporcional
+        width: '100%', // Se adapta al contenedor
+        type: 'line',
+        stacked: false
+      },
+      xaxis: {
+        categories: [
+          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ]
+      },
+      yaxis: [
+        {
+          tickAmount: 10,
+          min: 0,
+          max: 250
+        }
+      ],
+      colors: ['#0d6efd', '#4dabf7', '#003f88'],
+      stroke: {
+        width: [1, 1, 4]
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '80%',
+          borderRadius: 1
+        }
+      },
+      series: [
+        {
+          name: 'Recibidos',
+          type: 'column',
+          data: [160, 184, 241, 149, 180, 161, 132, 202, 160, 139, 149, 177]
+        },
+        {
+          name: 'Procesados',
+          type: 'column',
+          data: [160, 184, 237, 148, 181, 150, 123, 156, 126, 104, 124, 140]
+        },
+        {
+          name: 'Diferencia',
+          type: 'line',
+          data: [0, 0, 4, 1, -1, 11, 9, 46, 34, 35, 25, 37]
+        }
+      ]
+    };
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), opciones1);
+    chart1.render();
+  </script>
+  <!-- Incluir Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Incluir el script de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
